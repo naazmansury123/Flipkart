@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amazon Clone - Home</title>
+    <title>Amazon Clone - Cart</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -17,17 +17,13 @@
         </nav>
     </header>
     <main>
-        <h2>Featured Products</h2>
-        <div class="product-list">
-            <div class="product-item">
-                <a href="/product.html?id=1">
-                    <img src="/images/product1.jpg" alt="Product 1">
-                    <h3>Product 1</h3>
-                </a>
-                <p>$19.99</p>
-                <button onclick="addToCart(1)">Add to Cart</button>
-            </div>
-            <!-- Add more products similarly -->
+        <h2>Shopping Cart</h2>
+        <div class="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-total">
+            <h3>Total: $<span id="cart-total">0.00</span></h3>
+            <button onclick="checkout()">Checkout</button>
         </div>
     </main>
     <footer>

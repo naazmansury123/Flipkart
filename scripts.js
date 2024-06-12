@@ -1,30 +1,40 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Interactive Stories
-    const storiesSection = document.getElementById('stories');
-    storiesSection.innerHTML = `
-        <h3>The Haunted House</h3>
-        <p>You stand before a creepy old house. Do you enter?</p>
-        <button id="enter">Enter</button>
-        <button id="leave">Leave</button>
-    `;
+let cart = [];
 
-    document.getElementById('enter').addEventListener('click', () => {
-        alert('You enter the house and hear strange noises...');
+function addToCart(productId) {
+    const product = { id: productId, name: "Product 1", price: 19.99, quantity: 1 };
+    const existingProduct = cart.find(item => item.id === productId);
+    if (existingProduct) {
+        existingProduct.quantity += 1;
+    } else {
+        cart.push(product);
+    }
+    updateCart();
+}
+
+function updateCart() {
+    const cartItemsContainer = document.querySelector('.cart-items');
+    const cartTotal = document.getElementById('cart-total');
+    cartItemsContainer.innerHTML = '';
+
+    let total = 0;
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        const cartItem = document.createElement('div');
+        cartItem.innerHTML = `
+            <h4>${item.name}</h4>
+            <p>Price: $${item.price.toFixed(2)}</p>
+            <p>Quantity: ${item.quantity}</p>
+            <p>Total: $${itemTotal.toFixed(2)}</p>
+        `;
+        cartItemsContainer.appendChild(cartItem);
     });
 
-    document.getElementById('leave').addEventListener('click', () => {
-        alert('You decide to leave. Maybe another time...');
-    });
+    cartTotal.innerText = total.toFixed(2);
+}
 
-    // Contact Form
-    const contactForm = document.getElementById('contact-form');
-    contactForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const message = document.getElementById('message').value;
-
-        alert(`Thank you, ${name}! Your message has been received.`);
-        contactForm.reset();
-    });
-});
+function checkout() {
+    alert('Checkout process initiated.');
+    cart = [];
+    updateCart();
+}
